@@ -1,12 +1,16 @@
-#if ($newTeamKey)
-  #foreach($team in $newTeamKey)
-
-    <p>$team.getTeamName()</p>
-    <p>$team.getTeamGoal()</p>
-    <p>$team.getMember()</p>
-
+#if ($newTeamsKey)
+    <h2> All Teams </h2>
+  #foreach($Team in $newTeamsKey)
+    <p>$Team.getTeamName()</p>
+    <p>$Team.getTeamGoal()</p>
   #end
 #else
-  <p><em>No teams to show so far</em></p>
-  <p> <a href="/">Home </a></p>
+  <p><em>No Teams to show so far</em></p>
 #end
+  <h3> <a href="/">Home </a></h3>
+
+<h2> Your Entry: </h2>
+<br>
+<p>Artist:  $newTeamSingular.getTeamName()</p>
+<br>
+<p>Artist:  $newTeamSingular.getTeamGoal()</p>

@@ -1,11 +1,16 @@
-#if ($newMemberKey)
-  #foreach($member in $newMemberKey)
-
+#if ($newMembersKey)
+    <h2> All Participants </h2>
+  #foreach($member in $newMembersKey)
     <p>$member.getMemberName()</p>
     <p>$member.getMemberSkills()</p>
-
   #end
 #else
   <p><em>No members to show so far</em></p>
-  <p> <a href="/">Home </a></p>
 #end
+  <h3> <a href="/">Home </a></h3>
+
+<h2> Your Entry: </h2>
+<br>
+<p>Artist:  $newMemberSingular.getMemberName()</p>
+<br>
+<p>Artist:  $newMemberSingular.getMemberSkills()</p>
