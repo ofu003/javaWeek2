@@ -1,0 +1,11 @@
+#if ($newMemberKey)
+  #foreach($member in $newMemberKey)
+
+    <p>$member.getMemberName()</p>
+    <p>$member.getMemberSkills()</p>
+
+  #end
+#else
+  <p><em>No members to show so far</em></p>
+  <p> <a href="/">Home </a></p>
+#end

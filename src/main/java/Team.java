@@ -1,29 +1,28 @@
 public class Team{
-  private String[] mTeamMembers;
+  // private String[] mTeamMembers;
   private String mTeamName;
   private String mTeamGoal;
   //from other class
   private Member mMemberOfTeam;
 
-  public Team(Member member)
+  // constructor 1) for team information
+  public Team(String name, String goal){
+    mTeamName = name;
+    mTeamGoal = goal;
+  }
+  // constructor 2) stores member information for future use
+  public Team(Member member){
     mMemberOfTeam = member;
   }
-
-  public Team getMember(){
+  // getters
+  public Member getMember(){
     return mMemberOfTeam;
   }
-
-  public Team getmTeamMembers(){
-    return mTeamMembers;
-  }
-
-  public Team getmTeamName(){
+  public String getTeamName(){
     return mTeamName;
   }
-
-  public Team getmTeamGoal(){
+  public String getTeamGoal(){
     return mTeamGoal;
   }
-
-  // public return values of member or add to array
+  
 }
