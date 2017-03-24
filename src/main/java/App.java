@@ -52,7 +52,7 @@ public class App{
 
 
 
-    post("/showTeams", (request, response) ->{
+    post("/Teams", (request, response) ->{
       Map<String, Object> model = new HashMap<String, Object>();
 
       ArrayList<Team> Teams = request.session().attribute("newTeamsKey");
@@ -70,9 +70,19 @@ public class App{
       // new team needs to be put into model
       model.put("newTeamSingular", newTeam);
       model.put("newTeamsKey", Teams);
-      model.put("template", "templates/showTeams.vtl");
+      model.put("template", "templates/Teams.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/Teams/:mId", (request, response)->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team findId = Team.find(Integer.parseInt(request.params(":mId")));
+      model.put("findId",findId);
+      model.put("template","templates/Teams.vtl");
+      return new ModelAndView( model, layout);
+    }, new VelocityTemplateEngine());
+
+
 
   }
 }

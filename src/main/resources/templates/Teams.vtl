@@ -1,7 +1,8 @@
 #if ($newTeamsKey)
     <h2> All Teams </h2>
   #foreach($Team in $newTeamsKey)
-    <p>$Team.getTeamName()</p>
+    <p><a href = "/Teams/$Team.getId()">$Team.getTeamName()</a></p>
+    <br>
     <p>$Team.getTeamGoal()</p>
   #end
 #else
