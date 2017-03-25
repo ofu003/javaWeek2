@@ -1,3 +1,15 @@
+<!--#if ($newTeamsKey)
+    <h2> All Teams </h2>
+  #foreach($Team in $newTeamsKey)
+    <p><a href = "/Teams/$Team.getId()">$Team.getTeamName()</a></p>
+    <br>
+    <p>$Team.getTeamGoal()</p>
+  #end
+#else
+  <p><em>No Teams to show so far</em></p>
+#end
+-->
+
 #if ($newMembersKey)
     <h2> All Participants </h2>
   #foreach($member in $newMembersKey)
@@ -14,3 +26,5 @@
 <p>Artist:  $newMemberSingular.getMemberName()</p>
 <br>
 <p>Artist:  $newMemberSingular.getMemberSkills()</p>
+
+<p>Add to a team</p>

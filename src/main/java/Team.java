@@ -8,6 +8,7 @@ public class Team{
   private static List<Team> allTeams = new ArrayList<Team>();
   private int mId;
   //from other class
+  public static List<Member> allMembers = new ArrayList<Member>();
   private Member mMemberOfTeam;
 
   // constructor 1) for team information
@@ -19,7 +20,7 @@ public class Team{
   }
   // constructor 2) stores member information for future use
   public Team(Member member){
-    mMemberOfTeam = member;
+    return mMemberOfTeam;
   }
   // getters
   public Member getMember(){
