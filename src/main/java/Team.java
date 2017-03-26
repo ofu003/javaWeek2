@@ -5,7 +5,7 @@ public class Team{
   // private String[] mTeamMembers;
   private String mTeamName;
   private String mTeamGoal;
-  private static List<Team> allTeams = new ArrayList<Team>();
+  private static List<Team> instances = new ArrayList<Team>();
   private int mId;
   //from other class
   public static List<Member> allMembers = new ArrayList<Member>();
@@ -15,13 +15,10 @@ public class Team{
   public Team(String name, String goal){
     mTeamName = name;
     mTeamGoal = goal;
-    allTeams.add(this);
-    mId = allTeams.size();
+    instances.add(this);
+    mId = instances.size();
   }
-  // constructor 2) stores member information for future use
-  public Team(Member member){
-    return mMemberOfTeam;
-  }
+  
   // getters
   public Member getMember(){
     return mMemberOfTeam;
@@ -34,7 +31,7 @@ public class Team{
   }
 
   public static void clear(){
-    allTeams.clear();
+    instances.clear();
   }
 
   public int getId(){
@@ -42,7 +39,7 @@ public class Team{
   }
 
   public static Team find(int mId){
-    return allTeams.get(mId-1);
+    return instances.get(mId-1);
     }
 
 }

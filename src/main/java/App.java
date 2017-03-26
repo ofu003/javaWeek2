@@ -39,6 +39,7 @@ public class App{
 
       Members.add(newMember);
       // new member needs to be put into model
+
       model.put("newMemberSingular", newMember);
       model.put("newMembersKey", Members);
       model.put("template", "templates/showMembers.vtl");
