@@ -8,8 +8,7 @@ public class Team{
   private static List<Team> instances = new ArrayList<Team>();
   private int mId;
   //from other class
-  public static List<Member> allMembers = new ArrayList<Member>();
-  private Member mMemberOfTeam;
+  private ArrayList<Member> mMemberOfTeam;
 
   // constructor 1) for team information
   public Team(String name, String goal){
@@ -17,12 +16,11 @@ public class Team{
     mTeamGoal = goal;
     instances.add(this);
     mId = instances.size();
+    mMemberOfTeam = new ArrayList<Member>();
   }
-  
+
   // getters
-  public Member getMember(){
-    return mMemberOfTeam;
-  }
+
   public String getTeamName(){
     return mTeamName;
   }
@@ -38,8 +36,20 @@ public class Team{
     return mId;
   }
 
+  public static List<Team> returnInstances(){
+    return instances;
+  }
+
   public static Team find(int mId){
     return instances.get(mId-1);
     }
+
+  public void addAMember(Member newMember){
+    mMemberOfTeam.add(newMember);
+  }
+
+  public ArrayList<Member> getMember(){
+    return mMemberOfTeam;
+  }
 
 }

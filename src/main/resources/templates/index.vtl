@@ -1,38 +1,4 @@
 <h1> Hackathon </h1>
 
-
-<h2>Add a new Team:</h2>
-
-<form action="/Teams" method="post">
-  <div class="form-group">
-    <label for="teamName"> Team Name </label>
-    <!--the name attribute retrieves the value-->
-    <input id="teamName" name="teamName" type="text">
-  </div>
-
-  <div class="form-group">
-    <label for="teamGoal"> Team Goal </label>
-    <input id="teamGoal" name="teamGoal" type="text">
-  </div>
-
-  <button type="submit" class="btn btn-default"> Add Team </button>
-</form>
-
-<h3> Or </h3>
-
-
-<h2>Add a new member:</h2>
-<form action="/showMembers" method="post">
-  <div class="form-group">
-    <label for="memberName"> Member Name </label>
-    <!--the name attribute retrieves the value-->
-    <input id="memberName" name="memberName" type="text">
-  </div>
-
-  <div class="form-group">
-    <label for="memberSkills"> memberSkills </label>
-    <input id="memberSkills" name="memberSkills" type="text">
-  </div>
-
-  <button type="submit" class="btn btn-default"> Add Member </button>
-</form>
+<h2><a href="/Teams"> View a list of teams </a></h2>
+<h2> <a href="/Teams/new"> Add a new team</a></h2>
