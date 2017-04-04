@@ -1,0 +1,17 @@
+<h1>Add a member to $team.getTeamName()</h1>
+
+<form action="/members" method="post">
+  <input id="teamId" name="teamId" type="hidden" value="$team.getId()">
+
+  <div class="form-group">
+    <label for="name"> Name of member </label>
+    <input id="name" name="name" type="text" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="skills"> Describe this member's skills </label>
+    <input id="skills" name="skills" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add Member</button>
+</form>

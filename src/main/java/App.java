@@ -9,120 +9,96 @@ import static spark.Spark.*;
 
 public class App{
   public static void main (String[] args){
-    //staticFileLocation("/public");
+    staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      // "any extra info the template needs must be packaged in model"
-      model.put("newMembersKey", request.session().attribute("newMembersKey"));
-      model.put("newTeamKey", request.session().attribute("newTeamKey"));
-      // "FOR HOME PAGE, PARSE INDEX.VTL INTO $TEMPLATE"
       model.put("template", "templates/index.vtl");
-      // USE THE LAYOUT.VTL AS TEMPLATE
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-      //View all teams
-
-
-    // post("/Teams", (request, response) ->{
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //
-    //   // ArrayList<Member> Members = request.session().attribute("newMembersKey");
-    //   // if (Members == null) {
-    //   //   Members = new ArrayList<Member>();
-    //   //   request.session().attribute("newMembersKey", Members );
-    //   // }
-    //
-    //   String teamName = request.queryParams("teamName");
-    //   String teamGoal = request.queryParams("teamGoal");
-    //   // Construct  object using those variables
-    //   Team newTeam = new Team( teamName, teamGoal );
-    //
-    //   //instances.add(newTeam);
-    //   // new member needs to be put into model
-    //
-    //   // model.put("newMembersKey", Members);
-    //   //model.put("newMemberSingular", newMember);
-    //   model.put("newTeamsKey", newTeam);
-    //   model.put("template", "templates/Team-success.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-
-    get("/Teams", (request, response) ->{
-      Map<String, Object> model = new HashMap<String, Object>();
-      //model.put("teams", instances.returnInstances());
-      model.put("template", "templates/Team-form.vtl");
-      // ArrayList<Member> Members = request.session().attribute("newMembersKey");
-      // if (Members == null) {
-      //   Members = new ArrayList<Member>();
-      //   request.session().attribute("newMembersKey", Members );
-      // }
-      // // Get input value from index file, store as variable in App.java
-      // String name = request.queryParams("memberName");
-      // String skills = request.queryParams("memberSkills");
-      // // Construct  object using those variables
-      // Member newMember = new Member( name, skills );
-      //
-      // Members.add(newMember);
-      // // new member needs to be put into model
-      //
-      // model.put("newMemberSingular", newMember);
-      // model.put("newMembersKey", Members);
-      //model.put("template", "templates/Teams.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-
-    get("/Teams/new", (request, response) ->{
+    get("/teams/:mId/members/new", (request, response)->{
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/Team-form.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
-
-    post("/Teams", (request, response) ->{
-      Map<String, Object> model = new HashMap<String, Object>();
-
-      ArrayList<Team> Teams = request.session().attribute("newTeamsKey");
-      if (Teams == null) {
-        Teams = new ArrayList<Team>();
-        request.session().attribute("newTeamsKey", Teams );
-      }
-      // Get input value from index file, store as variable in App.java
-      String teamName = request.queryParams("teamName");
-      String teamGoal = request.queryParams("teamGoal");
-      // Construct  object using those variables
-      Team newTeam = new Team( teamName, teamGoal );
-
-      Teams.add( newTeam );
-      // Also needs to store member information and output to model
-      //
-      //
-      // new team needs to be put into model
-      model.put("newTeamSingular", newTeam);
-      model.put("newTeamsKey", Teams);
-      model.put("template", "templates/Teams.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
-    get("/Teams/:mId", (request, response)->{
-      Map<String, Object> model = new HashMap<String, Object>();
-      Team findId = Team.find(Integer.parseInt(request.params(":mId")));
-
-      model.put("newTeamSingular",findId);
-      model.put("template","templates/AddMemberForm.vtl");
+      Team team = Team.find(Integer.parseInt(request.params(":mId")));
+      // changed newTeamSingular to team
+      model.put("team",team);
+      model.put("template","templates/team-members-form.vtl");
       return new ModelAndView( model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/Teams/:mId/new", (request, response)->{
+    get("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Team findId = Team.find(Integer.parseInt(request.params(":mId")));
+      model.put("members", Member.all());
+      model.put("template", "templates/members.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-      model.put("newTeamSingular",findId);
-      model.put("template","templates/AddMembers.vtl");
+    post("/members", (request, response)->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team findId = Team.find(Integer.parseInt(request.params("teamId")));
+      // get user input from form
+      String name = request.queryParams("name");
+      String skills = request.queryParams("skills");
+      Member newMember = new Member(name, skills);
+      team.addAMember(newMember);
+      model.put("team",team);
+      model.put("template","templates/team-member-success.vtl");
       return new ModelAndView( model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/members/:mId", (request, response)->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      Member member = Member.find(Integer.parseInt(request.params(":mId")));
+      model.put("member", member);
+      model.put("template","templates/member.vtl");
+      return new ModelAndView( model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams/new", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/team-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/teams", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      // get user input from form to make a newTeam
+      String name = request.queryParams("name");
+      String goal = request.queryParams("goal");
+      Team newTeam = new Team("name","goal");
+      model.put("template", "templates/team-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("teams", Team.all());
+      model.put("template", "templates/teams.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team team = Team.find(Integer.parseInt(request.params(":id")));
+      model.put("team", team);
+      model.put("template", "templates/team.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    // Display specific member belonging to a team
+    
+
+      // get("/Teams/:team_id/:members/:member_id", (request, response)->{
+      //   Map<String, Object> model = new HashMap<String, Object>();
+      //   Team findId = Team.find(Integer.parseInt(request.params(":mId")));
+      //
+      //   model.put("newTeamSingular",findId);
+      //   model.put("template","templates/AddMembers.vtl");
+      //   return new ModelAndView( model, layout);
+      // }, new VelocityTemplateEngine());
+
+
 
   }
 }

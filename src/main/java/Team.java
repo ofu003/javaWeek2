@@ -48,7 +48,7 @@ public class Team{
     mMemberOfTeam.add(newMember);
   }
 
-  public ArrayList<Member> getMember(){
+  public ArrayList<Member> getMembers(){
     return mMemberOfTeam;
   }
 
