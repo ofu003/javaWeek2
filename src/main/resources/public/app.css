@@ -1,0 +1,26 @@
+
+body{
+  background-color: #e6f2ff
+}
+
+h1{
+  font-family: monospace;
+  color: #004d4d;
+}
+
+h3{
+  font-family: monospace;
+  color: #ffffcc;
+}
+
+p{
+  font-family: inherit;
+  color: #000066;
+  size: 18px;
+}
+
+
+
+ul{
+  list-style-type:none;
+}

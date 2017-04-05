@@ -85,19 +85,5 @@ public class App{
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // Display specific member belonging to a team
-
-
-      // get("/Teams/:team_id/:members/:member_id", (request, response)->{
-      //   Map<String, Object> model = new HashMap<String, Object>();
-      //   Team findId = Team.find(Integer.parseInt(request.params(":mId")));
-      //
-      //   model.put("newTeamSingular",findId);
-      //   model.put("template","templates/AddMembers.vtl");
-      //   return new ModelAndView( model, layout);
-      // }, new VelocityTemplateEngine());
-
-
-
   }
 }
