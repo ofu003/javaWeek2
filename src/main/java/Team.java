@@ -1,14 +1,14 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Team{
-  // private String[] mTeamMembers;
   private String mTeamName;
   private String mTeamGoal;
-  private static List<Team> instances = new ArrayList<Team>();
+  // private String[] mTeamMembers;
+  private static ArrayList<Team> instances = new ArrayList<Team>();
   private int mId;
   //from other class
-  private ArrayList<Member> mMemberOfTeam;
+  private List<Member> mMembers;
 
   // constructor 1) for team information
   public Team(String name, String goal){
@@ -16,7 +16,7 @@ public class Team{
     mTeamGoal = goal;
     instances.add(this);
     mId = instances.size();
-    mMemberOfTeam = new ArrayList<Member>();
+    mMembers = new ArrayList<Member>();
   }
 
   // getters
@@ -28,6 +28,10 @@ public class Team{
     return mTeamGoal;
   }
 
+  public static ArrayList<Team> all() {
+    return instances;
+  }
+
   public static void clear(){
     instances.clear();
   }
@@ -36,20 +40,15 @@ public class Team{
     return mId;
   }
 
-  public static List<Team> returnInstances(){
-    return instances;
-  }
-
   public static Team find(int mId){
     return instances.get(mId-1);
-    }
+  }
+
+  public List<Member> getMembers(){
+    return mMembers;
+  }
 
   public void addAMember(Member newMember){
-    mMemberOfTeam.add(newMember);
+    mMembers.add(newMember);
   }
-
-  public ArrayList<Member> getMembers(){
-    return mMemberOfTeam;
-  }
-
 }
